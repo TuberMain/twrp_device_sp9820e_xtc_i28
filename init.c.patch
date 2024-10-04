@@ -1,0 +1,53 @@
+--- a/system/core/init/init.c	2024-08-19 15:28:27.676274800 +0800
++++ b/system/core/init/init.c	2024-08-19 15:32:37.286274800 +0800
+@@ -889,46 +889,14 @@
+ 
+ static bool selinux_is_disabled(void)
+ {
+-#ifdef ALLOW_DISABLE_SELINUX
+-    char tmp[PROP_VALUE_MAX];
+-
+-    if (access("/sys/fs/selinux", F_OK) != 0) {
+-        /* SELinux is not compiled into the kernel, or has been disabled
+-         * via the kernel command line "selinux=0".
+-         */
+-        return true;
+-    }
+-
+-    if ((property_get("ro.boot.selinux", tmp) != 0) && (strcmp(tmp, "disabled") == 0)) {
+-        /* SELinux is compiled into the kernel, but we've been told to disable it. */
+-        return true;
+-    }
+-#endif
+-
+-    return false;
++    /* ALWAYS DISABLED! */
++    return true;
+ }
+ 
+ static bool selinux_is_enforcing(void)
+ {
+-#ifdef ALLOW_DISABLE_SELINUX
+-    char tmp[PROP_VALUE_MAX];
+-
+-    if (property_get("ro.boot.selinux", tmp) == 0) {
+-        /* Property is not set.  Assume enforcing */
+-        return true;
+-    }
+-
+-    if (strcmp(tmp, "permissive") == 0) {
+-        /* SELinux is in the kernel, but we've been told to go into permissive mode */
+-        return false;
+-    }
+-
+-    if (strcmp(tmp, "enforcing") != 0) {
+-        ERROR("SELinux: Unknown value of ro.boot.selinux. Got: \"%s\". Assuming enforcing.\n", tmp);
+-    }
+-
+-#endif
+-    return true;
++    /* ALWAYS PERMISSIVE! */
++    return false;
+ }
+ 
+ int selinux_reload_policy(void)
