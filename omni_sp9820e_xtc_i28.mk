@@ -16,8 +16,8 @@ $(call inherit-product, device/xtc/sp9820e_xtc_i28/device.mk)
 
 PRODUCT_DEVICE := sp9820e_xtc_i28
 PRODUCT_NAME := omni_sp9820e_xtc_i28
-PRODUCT_BRAND := I28
-PRODUCT_MODEL := I28
+PRODUCT_BRAND := XTC
+PRODUCT_MODEL := D3-i28(by Cms)
 PRODUCT_MANUFACTURER := xtc
 
 PRODUCT_GMS_CLIENTID_BASE := android-xtc
